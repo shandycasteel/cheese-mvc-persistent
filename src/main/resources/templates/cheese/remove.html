@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
 
-<h1 th:text="${title}">Default Title</h1>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav th:replace="fragments :: navigation"></nav>
+    </div>
 
-<nav th:replace="fragments :: navigation"></nav>
+    <div class="jumbotron">
+        <h1 th:text="${title}" class="display-3">Default Title</h1>
+    </div>
 
 <form method="post">
 
@@ -15,8 +20,9 @@
         <br />
     </div>
 
-    <input type="submit" value="Remove Cheese" />
+    <input type="submit" value="Remove Cheese" class="btn btn-secondary" />
 </form>
 
+</div>
 </body>
 </html>

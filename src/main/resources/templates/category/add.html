@@ -3,11 +3,15 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body>
+<div class="container">
+<div class="header clearfix">
+    <nav th:replace="fragments :: navigation"></nav>
+</div>
 
-<h1 th:text="${title}">Default Title</h1>
-
-<nav th:replace="fragments :: navigation"></nav>
+<div class="jumbotron">
+    <h1 th:text="${title}" class="display-3">Default Title</h1>
+</div>
 
 <form method="post" style="max-width:600px;" th:object="${category}">
     <div class="form-group">
@@ -16,10 +20,10 @@
         <span th:errors="*{name}" class="error text-danger"></span>
     </div>
 
-    <input type="submit" value="Add Category" />
+    <input type="submit" value="Add Category" class="btn btn-secondary" />
 
 </form>
 
+</div>
 </body>
-
 </html>

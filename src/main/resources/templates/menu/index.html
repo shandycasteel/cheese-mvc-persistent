@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
-    <head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head"></head>
 
-    <body class="container">
+<body>
+<div class="container">
+<div class="header clearfix">
+    <nav th:replace="fragments :: navigation"></nav>
+</div>
 
-        <h1 th:text="${title}">Default Title</h1>
+<div class="jumbotron">
+    <h1 th:text="${title}" class="display-3">Default Title</h1>
+</div>
 
-        <nav th:replace="fragments :: navigation"></nav>
+<p th:unless="${menus} and ${menus.size()}">No Menus :(</p>
 
-        <p th:unless="${menus} and ${menus.size()}">No Menus :(</p>
+<ul class="list-group list-group-flush"  th:each="menu : ${menus}">
+    <li class="list-group-item">
+        <a th:href="@{'/menu/view/' + ${menu.id}}" th:text="${menu.name}"></a>
+    </li>
+</ul>
 
-        <ul class="list-group list-group-flush" th:each="menu : ${menus}">
-            <li>
-                <a th:href="@{'/menu/view/' + ${menu.menuId}}" th:text="${menu.name}" class="list-group-item"></a>
-            </li>
-        </ul>
+<br />
+<p><a class="nav-link" href="/menu/add">Add Menu</a></p>
 
-
-    </body>
-
+</div>
+</body>
 </html>

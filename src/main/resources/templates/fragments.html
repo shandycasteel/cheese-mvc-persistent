@@ -10,15 +10,11 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light navbar-expand-lg" th:fragment="navigation">
-    &#129472;
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a class="nav-link" href="/cheese">List</a></li>
-        <li class="nav-item"><a class="nav-link" href="/cheese/add">Add</a></li>
-        <li class="nav-item"><a class="nav-link" href="/category">Category</a></li>
-        <li class="nav-item"><a class="nav-link" href="/cheese/remove">Remove</a></li>
-        <li class="nav-item"><a class="nav-link" href="/category/add">Add Category</a></li>
-        <li class="nav-item"><a class="nav-link" href="/menu/add">Add Menu</a></li>
+<nav th:fragment="navigation">
+    <ul class="nav nav-pills float-right">
+        <li class="nav-item"><a class="nav-link" href="/cheese">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="/menu">Menus</a></li>
     </ul>
 </nav>
 

@@ -13,16 +13,12 @@
     <h1 th:text="${title}" class="display-3">Default Title</h1>
 </div>
 
-<form method="post" th:object="${menu}" style="max-width:600px;">
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error text-danger"></span>
-    </div>
+<ul class="list-group list-group-flush">
+    <li th:each="cheese : ${menu.cheeses}" th:text="${cheese.name}" class="list-group-item"></li>
+</ul>
 
-    <input type="submit" value="Add Menu" class="btn btn-secondary" />
-
-</form>
+<br />
+<p><a th:href="'/menu/add-item/' + ${menu.id}">Add Cheese</a></p>
 
 </div>
 </body>

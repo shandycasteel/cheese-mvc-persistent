@@ -11,7 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -79,17 +78,42 @@ public class CheeseController {
         return "redirect:/cheese";
     }
 
-    @RequestMapping(value = "/category/{id}",method = RequestMethod.GET)
-    public String category(Model model, @PathVariable("id") int id) {
+    @RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
+    public String category(Model model, @PathVariable int categoryId) {
 
-        if (!categoryDao.exists(id)) {
-            return "redirect:/cheese";
+        if (!categoryDao.exists(categoryId)) {
+            return "redirect:/category";
         }
 
-        model.addAttribute("title", categoryDao.findOne(id).getName() + " Cheeses");
-        model.addAttribute("cheeses", categoryDao.findOne(id).getCheeses());
+        model.addAttribute("title", categoryDao.findOne(categoryId).getName() + " Cheeses");
+        model.addAttribute("cheeses", categoryDao.findOne(categoryId).getCheeses());
 
         return "cheese/index";
     }
 
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
+    public String displayEditCheeseForm(Model model, @PathVariable int cheeseId) {
+
+        model.addAttribute("cheese", cheeseDao.findOne(cheeseId));
+        model.addAttribute("categories", categoryDao.findAll());
+
+        return"cheese/edit";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditForm(@RequestParam int cheeseId, @RequestParam String cheeseName,
+    @RequestParam String cheeseDescription, @RequestParam int categoryId) {
+
+        Cheese cheese = cheeseDao.findOne(cheeseId);
+
+        Category category = categoryDao.findOne(categoryId);
+
+        cheese.setName(cheeseName);
+        cheese.setDescription(cheeseDescription);
+        cheese.setCategory(category);
+
+        cheeseDao.save(cheese);
+
+        return "redirect:";
+    }
 }

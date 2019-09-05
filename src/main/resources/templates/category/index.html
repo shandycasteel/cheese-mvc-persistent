@@ -3,19 +3,27 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body>
 
-    <h1 th:text="${title}">Default Title</h1>
-
+<div class="container">
+<div class="header clearfix">
     <nav th:replace="fragments :: navigation"></nav>
+</div>
 
-    <p th:unless="${categories} and ${categories.size()}">No Categories :(</p>
+<div class="jumbotron">
+    <h1 th:text="${title}" class="display-3">Default Title</h1>
+</div>
 
-    <ul class="list-group list-group-flush" th:each="category : ${categories}">
-        <li class="list-group-item" th:text="${category.name}"></li>
-    </ul>
+<p th:unless="${categories} and ${categories.size()}">No Categories :(</p>
 
+<ul class="list-group list-group-flush" th:each="category : ${categories}">
+    <li class="list-group-item" th:text="${category.name}"></li>
+</ul>
 
+<br />
+
+<p><a class="nav-link" href="/category/add">Add Category</a></p>
+
+</div>
 </body>
-
 </html>

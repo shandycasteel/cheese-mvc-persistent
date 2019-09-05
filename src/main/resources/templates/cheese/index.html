@@ -4,32 +4,46 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav th:replace="fragments :: navigation"></nav>
+    </div>
 
-    <h1 th:text="${title}">Default Title</h1>
-
-    <nav th:replace="fragments :: navigation"></nav>
-
-    <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
+<div class="jumbotron">
+    <h1 th:text="${title}" class="display-3">Default Title</h1>
+</div>
 
 
-    <table class="table">
+<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
-        <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-        </tr>
-        </thead>
 
-        <tr th:each="cheese : ${cheeses}">
-            <td th:text="${cheese.name}"></td>
-            <td th:text="${cheese.description}"></td>
-            <td th:text="${cheese.category.getName()}"></td>
-        </tr>
+<table class="table table-bordered table-hover">
 
-    </table>
+    <thead class="thead-dark">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th></th>
+    </tr>
+    </thead>
 
+    <tr th:each="cheese : ${cheeses}">
+        <td th:text="${cheese.name}"></td>
+        <td th:text="${cheese.description}"></td>
+        <td th:text="${cheese.category.name}"></td>
+        <td><a th:href="@{'/cheese/edit/' + ${cheese.id}}">EDIT</a></td>
+    </tr>
+
+</table>
+
+<br />
+<p>
+    <a href="/cheese/add">Add</a> |
+    <a href="/cheese/remove">Remove</a>
+</p>
+
+</div>
 </body>
 </html>
